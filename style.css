@@ -1,7 +1,14 @@
 body {
     margin: 0;
+
     font-family: "Cascadia Code", monospace;
-    background-color: #f2f2f2;
+
+    background-image: url("resources/gfx/background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    min-height: 100vh;
 }
 
 #scoreText {
