@@ -1,0 +1,15 @@
+body {
+    font-family: "Cascadia Code", monospace;
+    text-align: center;
+    background-color: #4d4d4d;
+}
+
+button {
+    font-family: "Cascadia Code", monospace;
+    padding: 10px 20px;
+    background-color: #000000;
+    border: 1px solid #ffffff;
+    cursor: pointer;
+    color: #ffffff;
+    margin: 10px;
+}
