@@ -11,15 +11,23 @@
 
     <h2 id="scoreText">Score: 0</h2>
 
-    <!-- cool text -->
     <p>Click the food to earn points. They will move when clicked!</p>
 
-    <!-- Image Sources -->
-    <img src="resources/gfx/bread.png" id="breadImage" alt="Bread">
-    <img src="resources/gfx/knife.png" id="knifeImage" alt="Knife">
-    <img src="resources/gfx/chickenleg.png" id="chickenLegImage" alt="Chicken Leg">
+    <!-- FOOD -->
+    <img src="resources/gfx/bread.png" id="breadImage" class="food" alt="Bread">
+    <img src="resources/gfx/knife.png" id="knifeImage" class="food" alt="Knife">
+    <img src="resources/gfx/chickenleg.png" id="chickenLegImage" class="food" alt="Chicken Leg">
 
-    <!-- Audio Sources -->
+    <!-- UI -->
+    <img src="resources/gfx/shopbutton.png" id="shopButtonImage" alt="Shop Button">
+
+    <div id="shopMenu" class="hidden">
+        <h3>Shop</h3>
+        <button id="upgradeClick">Upgrade Click (+1) — Cost: 20</button>
+        <p>Increase your click power!</p>
+    </div>
+
+    <!-- AUDIO -->
     <audio id="clickSound" src="resources/audio/click.wav" preload="auto"></audio>
     <audio id="backgroundMusic" src="resources/audio/backgroundmusic.ogg" preload="auto"></audio>
 

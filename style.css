@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: "Cascadia Code", monospace;
-    background-color: #8a8a8a;
+    background-color: #f2f2f2;
 }
 
 #scoreText {
@@ -12,11 +12,12 @@ p {
     margin-left: 10px;
 }
 
-/* Game objects */
-img {
+/* -------------------- */
+/* FOOD SPRITES */
+/* -------------------- */
+.food {
     position: absolute;
-
-    width: 96px; /* or 64px, 128px etc, MUST be a CLEAN multiple of 32 to maintain high image quality */
+    width: 96px;
     height: 96px;
 
     image-rendering: pixelated;
@@ -24,4 +25,63 @@ img {
 
     cursor: pointer;
     user-select: none;
+}
+
+/* -------------------- */
+/* SHOP BUTTON (UI) */
+/* -------------------- */
+#shopButtonImage {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    width: 64px;  /* 32x2 scale */
+    height: 32px; /* 16x2 scale */
+
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+
+    cursor: pointer;
+}
+
+/* -------------------- */
+/* SHOP MENU */
+/* -------------------- */
+.hidden {
+    display: none;
+}
+
+#shopMenu {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+
+    background: white;
+    border: 2px solid black;
+    padding: 10px;
+    width: 200px;
+}
+
+/* -------------------- */
+/* FLOATING TEXT */
+/* -------------------- */
+.floatingText {
+    position: absolute;
+    font-size: 18px;
+    font-weight: bold;
+    color: green;
+    pointer-events: none;
+
+    animation: floatUp 0.8s ease-out forwards;
+}
+
+@keyframes floatUp {
+    from {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
 }

@@ -1,10 +1,18 @@
+// --------------------
+// CORE VARIABLES
+// --------------------
 let score = 0;
+let pointsPerClick = 1;
 
 const scoreText = document.getElementById("scoreText");
 
 const bread = document.getElementById("breadImage");
 const knife = document.getElementById("knifeImage");
 const chickenLeg = document.getElementById("chickenLegImage");
+
+const shopButton = document.getElementById("shopButtonImage");
+const shopMenu = document.getElementById("shopMenu");
+const upgradeClick = document.getElementById("upgradeClick");
 
 const clickSound = document.getElementById("clickSound");
 const music = document.getElementById("backgroundMusic");
@@ -24,11 +32,8 @@ function updateScore() {
 function moveFood(food) {
     const padding = 100;
 
-    const maxX = window.innerWidth - padding;
-    const maxY = window.innerHeight - padding;
-
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
+    const x = Math.random() * (window.innerWidth - padding);
+    const y = Math.random() * (window.innerHeight - padding);
 
     food.style.left = x + "px";
     food.style.top = y + "px";
@@ -36,23 +41,45 @@ function moveFood(food) {
 
 
 // --------------------
+// FLOATING TEXT
+// --------------------
+function showFloatingText(x, y, text) {
+    const el = document.createElement("div");
+    el.className = "floatingText";
+    el.textContent = text;
+
+    el.style.left = x + "px";
+    el.style.top = y + "px";
+
+    document.body.appendChild(el);
+
+    setTimeout(() => {
+        el.remove();
+    }, 800);
+}
+
+
+// --------------------
 // CLICK SYSTEM
 // --------------------
-function makeClickable(food, points) {
-    food.addEventListener("click", () => {
-        score += points;
+function makeClickable(food, basePoints) {
+    food.addEventListener("click", (e) => {
+        const gained = pointsPerClick * basePoints;
+
+        score += gained;
         updateScore();
         moveFood(food);
 
-        // sound effect
         clickSound.currentTime = 0;
         clickSound.play();
+
+        showFloatingText(e.clientX, e.clientY, `+${gained}`);
     });
 }
 
 
 // --------------------
-// GAME SETUP
+// SETUP FOOD
 // --------------------
 makeClickable(bread, 1);
 makeClickable(knife, 5);
@@ -64,7 +91,33 @@ moveFood(chickenLeg);
 
 
 // --------------------
-// BACKGROUND MUSIC (starts after first click)
+// SHOP TOGGLE
+// --------------------
+shopButton.addEventListener("click", () => {
+    shopMenu.classList.toggle("hidden");
+});
+
+
+// --------------------
+// UPGRADE SYSTEM
+// --------------------
+upgradeClick.addEventListener("click", () => {
+    const cost = 20;
+
+    if (score >= cost) {
+        score -= cost;
+        pointsPerClick += 1;
+
+        updateScore();
+        alert("Upgrade purchased! +1 click power");
+    } else {
+        alert("Not enough score!");
+    }
+});
+
+
+// --------------------
+// BACKGROUND MUSIC
 // --------------------
 document.body.addEventListener("click", () => {
     music.loop = true;
