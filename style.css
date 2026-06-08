@@ -1,15 +1,27 @@
 body {
+    margin: 0;
     font-family: "Cascadia Code", monospace;
-    text-align: center;
-    background-color: #4d4d4d;
+    background-color: #8a8a8a;
 }
 
-button {
-    font-family: "Cascadia Code", monospace;
-    padding: 10px 20px;
-    background-color: #000000;
-    border: 1px solid #ffffff;
-    cursor: pointer;
-    color: #ffffff;
+#scoreText {
     margin: 10px;
+}
+
+p {
+    margin-left: 10px;
+}
+
+/* Game objects */
+img {
+    position: absolute;
+
+    width: 96px; /* or 64px, 128px etc, MUST be a CLEAN multiple of 32 to maintain high image quality */
+    height: 96px;
+
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+
+    cursor: pointer;
+    user-select: none;
 }

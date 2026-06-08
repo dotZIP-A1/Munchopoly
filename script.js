@@ -1,19 +1,73 @@
-document.getElementById("goodButton").addEventListener("click", () => {
-    alert("YAY! YOU PRESSED THE GOOD BUTTON! YOU'RE AWESOME!");
-});
+let score = 0;
 
-document.getElementById("evilButton").addEventListener("click", () => {
-    alert("I TOLD U NOT TO PRESS IT WE'RE DOOMED!");
-});
+const scoreText = document.getElementById("scoreText");
 
-document.getElementById("breadImage").addEventListener("click", () => {
-    alert("mmm yum, hope it ain't soggy!");
-});
+const bread = document.getElementById("breadImage");
+const knife = document.getElementById("knifeImage");
+const chickenLeg = document.getElementById("chickenLegImage");
 
-document.getElementById("knifeImage").addEventListener("click", () => {
-    alert("u clicked the knife image! be careful with 'em, they can be dangerous!");
-});
+const clickSound = document.getElementById("clickSound");
+const music = document.getElementById("backgroundMusic");
 
-document.getElementById("chickenLegImage").addEventListener("click", () => {
-    alert("chicken wing chicken wing, hotdog and baloney!");
-});
+
+// --------------------
+// SCORE SYSTEM
+// --------------------
+function updateScore() {
+    scoreText.textContent = `Score: ${score}`;
+}
+
+
+// --------------------
+// MOVEMENT SYSTEM
+// --------------------
+function moveFood(food) {
+    const padding = 100;
+
+    const maxX = window.innerWidth - padding;
+    const maxY = window.innerHeight - padding;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    food.style.left = x + "px";
+    food.style.top = y + "px";
+}
+
+
+// --------------------
+// CLICK SYSTEM
+// --------------------
+function makeClickable(food, points) {
+    food.addEventListener("click", () => {
+        score += points;
+        updateScore();
+        moveFood(food);
+
+        // sound effect
+        clickSound.currentTime = 0;
+        clickSound.play();
+    });
+}
+
+
+// --------------------
+// GAME SETUP
+// --------------------
+makeClickable(bread, 1);
+makeClickable(knife, 5);
+makeClickable(chickenLeg, 2);
+
+moveFood(bread);
+moveFood(knife);
+moveFood(chickenLeg);
+
+
+// --------------------
+// BACKGROUND MUSIC (starts after first click)
+// --------------------
+document.body.addEventListener("click", () => {
+    music.loop = true;
+    music.volume = 0.3;
+    music.play();
+}, { once: true });
