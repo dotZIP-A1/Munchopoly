@@ -1,4 +1,4 @@
-# HTML Game
+# Munchopoly
 
 ## Introduction
 

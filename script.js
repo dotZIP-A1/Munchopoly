@@ -6,16 +6,37 @@ let pointsPerClick = 1;
 
 const scoreText = document.getElementById("scoreText");
 
-const bread = document.getElementById("breadImage");
-const knife = document.getElementById("knifeImage");
-const chickenLeg = document.getElementById("chickenLegImage");
-
 const shopButton = document.getElementById("shopButtonImage");
 const shopMenu = document.getElementById("shopMenu");
 const upgradeClick = document.getElementById("upgradeClick");
 
 const clickSound = document.getElementById("clickSound");
 const music = document.getElementById("backgroundMusic");
+
+
+// --------------------
+// FOOD DATA (ARRAY SYSTEM)
+// --------------------
+const foods = [
+    {
+        element: document.getElementById("breadImage"),
+        points: 1
+    },
+    {
+        element: document.getElementById("chickenLegImage"),
+        points: 2
+    },
+    {
+        element: document.getElementById("knifeImage"),
+        points: 3
+    },
+
+    {
+        element: document.getElementById("pizzaImage"),
+        points: 4
+    },
+
+];
 
 
 // --------------------
@@ -79,15 +100,12 @@ function makeClickable(food, basePoints) {
 
 
 // --------------------
-// SETUP FOOD
+// SETUP FOOD (ARRAY LOOP)
 // --------------------
-makeClickable(bread, 1);
-makeClickable(knife, 5);
-makeClickable(chickenLeg, 2);
-
-moveFood(bread);
-moveFood(knife);
-moveFood(chickenLeg);
+foods.forEach(food => {
+    makeClickable(food.element, food.points);
+    moveFood(food.element);
+});
 
 
 // --------------------
@@ -101,17 +119,18 @@ shopButton.addEventListener("click", () => {
 // --------------------
 // UPGRADE SYSTEM
 // --------------------
-upgradeClick.addEventListener("click", () => {
-    const cost = 20;
+let upgradeCost = 20;
 
-    if (score >= cost) {
-        score -= cost;
+upgradeClick.addEventListener("click", () => {
+    if (score >= upgradeCost) {
+        score -= upgradeCost;
         pointsPerClick += 1;
 
         updateScore();
-        alert("Upgrade purchased! +1 click power");
-    } else {
-        alert("Not enough score!");
+
+        upgradeCost = Math.floor(upgradeCost * 1.5);
+
+        upgradeClick.textContent = `Upgrade (+1 Click Power) - ${upgradeCost}`;
     }
 });
 
@@ -122,5 +141,5 @@ upgradeClick.addEventListener("click", () => {
 document.body.addEventListener("click", () => {
     music.loop = true;
     music.volume = 0.3;
-    music.play();
+    music.play().catch(() => {});
 }, { once: true });

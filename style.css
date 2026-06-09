@@ -42,8 +42,8 @@ p {
     bottom: 20px;
     right: 20px;
 
-    width: 64px;  /* 32x2 scale */
-    height: 32px; /* 16x2 scale */
+    width: 128px;  /* 32x2 scale */
+    height: 64px; /* 16x2 scale */
 
     image-rendering: pixelated;
     image-rendering: crisp-edges;
