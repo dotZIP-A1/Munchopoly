@@ -12,6 +12,7 @@ const upgradeClick = document.getElementById("upgradeClick");
 
 const clickSound = document.getElementById("clickSound");
 const music = document.getElementById("backgroundMusic");
+const buyUpgradeSound = document.getElementById("buyUpgrade");
 
 
 // --------------------
@@ -35,6 +36,15 @@ const foods = [
         element: document.getElementById("pizzaImage"),
         points: 4
     },
+
+    {
+        element: document.getElementById("burgerImage"),
+        points: 5
+    },
+    {
+        element: document.getElementById("baconImage"),
+        points: 3
+    }
 
 ];
 
@@ -123,14 +133,18 @@ let upgradeCost = 20;
 
 upgradeClick.addEventListener("click", () => {
     if (score >= upgradeCost) {
+
         score -= upgradeCost;
         pointsPerClick += 1;
 
         updateScore();
 
         upgradeCost = Math.floor(upgradeCost * 1.5);
-
         upgradeClick.textContent = `Upgrade (+1 Click Power) - ${upgradeCost}`;
+
+        // PLAY SOUND
+        buyUpgradeSound.currentTime = 0;
+        buyUpgradeSound.play();
     }
 });
 
