@@ -3,12 +3,20 @@
 // --------------------
 let score = 0;
 let pointsPerClick = 1;
+let yps = 0;
 
 const scoreText = document.getElementById("scoreText");
+const ypsText = document.getElementById("ypsText");
 
 const shopButton = document.getElementById("shopButtonImage");
 const shopMenu = document.getElementById("shopMenu");
+
 const upgradeClick = document.getElementById("upgradeClick");
+const biggerMouth = document.getElementById("biggerMouth");
+const yumDeluxe = document.getElementById("yumDeluxe");
+const buyChef = document.getElementById("buyChef");
+const buyBakery = document.getElementById("buyBakery");
+
 
 const clickSound = document.getElementById("clickSound");
 const music = document.getElementById("backgroundMusic");
@@ -31,27 +39,22 @@ const foods = [
         element: document.getElementById("knifeImage"),
         points: 3
     },
-
     {
         element: document.getElementById("pizzaImage"),
         points: 4
     },
-
     {
         element: document.getElementById("burgerImage"),
         points: 5
     },
-
     {
         element: document.getElementById("baconImage"),
         points: 3
     },
-
     {
         element: document.getElementById("appleImage"),
         points: 2
     }
-
 ];
 
 
@@ -59,7 +62,11 @@ const foods = [
 // SCORE SYSTEM
 // --------------------
 function updateScore() {
-    scoreText.textContent = `Score: ${score}`;
+    scoreText.textContent = `Yums: ${Math.floor(score)}`;
+}
+
+function updateYPS() {
+    ypsText.textContent = `YPS: ${yps}`;
 }
 
 
@@ -104,19 +111,24 @@ function makeClickable(food, basePoints) {
         const gained = pointsPerClick * basePoints;
 
         score += gained;
+
         updateScore();
         moveFood(food);
 
         clickSound.currentTime = 0;
         clickSound.play();
 
-        showFloatingText(e.clientX, e.clientY, `+${gained}`);
+        showFloatingText(
+            e.clientX,
+            e.clientY,
+            `+${gained}`
+        );
     });
 }
 
 
 // --------------------
-// SETUP FOOD (ARRAY LOOP)
+// SETUP FOOD
 // --------------------
 foods.forEach(food => {
     makeClickable(food.element, food.points);
@@ -132,9 +144,8 @@ shopButton.addEventListener("click", () => {
 });
 
 
-// --------------------
-// UPGRADE SYSTEM
-// --------------------
+// TODO: Add more multipliers
+// CLICK POWER UPGRADE
 let upgradeCost = 20;
 
 upgradeClick.addEventListener("click", () => {
@@ -146,20 +157,129 @@ upgradeClick.addEventListener("click", () => {
         updateScore();
 
         upgradeCost = Math.floor(upgradeCost * 1.5);
-        upgradeClick.textContent = `Upgrade (+1 Click Power) - ${upgradeCost}`;
 
-        // PLAY SOUND
+        upgradeClick.textContent =
+            `Upgrade (+1 Yum Power) - ${upgradeCost}`;
+
         buyUpgradeSound.currentTime = 0;
         buyUpgradeSound.play();
     }
 });
 
 
-// --------------------
+// BIG MOUTH UPGRADE
+let bigMouthCost = 50;
+
+biggerMouth.addEventListener("click", () => {
+    if (score >= bigMouthCost) {
+
+        score -= bigMouthCost;
+        pointsPerClick += 5;
+
+        updateScore();
+
+        bigMouthCost = Math.floor(bigMouthCost * 1.5);
+
+        biggerMouth.textContent =
+            `Bigger Mouth (+5 Yum Power) - ${bigMouthCost}`;
+
+        buyUpgradeSound.currentTime = 0;
+        buyUpgradeSound.play();
+    }
+});
+
+
+// YUM DELUXE UPGRADE
+let yumDeluxeCost = 150;
+
+yumDeluxe.addEventListener("click", () => {
+    if (score >= yumDeluxeCost) {
+
+        score -= yumDeluxeCost;
+        pointsPerClick += 5;
+
+        updateScore();
+
+        yumDeluxeCost = Math.floor(yumDeluxeCost * 1.5);
+
+        yumDeluxe.textContent =
+            `Yum Deluxe (+10 Yum Power) - ${yumDeluxeCost}`;
+
+        buyUpgradeSound.currentTime = 0;
+        buyUpgradeSound.play();
+    }
+});
+
+
+// TODO: Add more YPS Upgrades
+// CHEF (YPS) UPGRADE
+let chefCost = 50;
+let chefsOwned = 0;
+
+buyChef.addEventListener("click", () => {
+    if (score >= chefCost) {
+
+        score -= chefCost;
+
+        chefsOwned += 1;
+        yps += 1;
+
+        updateScore();
+        updateYPS();
+
+        chefCost = Math.floor(chefCost * 1.5);
+
+        buyChef.textContent =
+            `Chef (${chefsOwned}) +1 YPS - ${chefCost}`;
+
+        buyUpgradeSound.currentTime = 0;
+        buyUpgradeSound.play();
+    }
+});
+
+
+// BAKERY (YPS) UPGRADE
+let bakeryCost = 150;
+let bakeriesOwned = 0;
+
+buyBakery.addEventListener("click", () => {
+    if (score >= bakeryCost) {
+
+        score -= bakeryCost;
+
+        bakeriesOwned += 1;
+        yps += 5;
+
+        updateScore();
+        updateYPS();
+
+        bakeryCost = Math.floor(bakeryCost * 1.5);
+
+        buyBakery.textContent =
+            `Bakery (${bakeriesOwned}) +5 YPS - ${bakeryCost}`;
+
+        buyUpgradeSound.currentTime = 0;
+        buyUpgradeSound.play();
+    }
+});
+
+
+// AUTOMATION SYSTEM
+setInterval(() => {
+    score += yps / 10;
+    updateScore();
+}, 100);
+
+
 // BACKGROUND MUSIC
-// --------------------
 document.body.addEventListener("click", () => {
     music.loop = true;
     music.volume = 0.3;
+
     music.play().catch(() => {});
 }, { once: true });
+
+
+// INITIAL UI UPDATE
+updateScore();
+updateYPS();

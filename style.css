@@ -92,3 +92,8 @@ p {
         transform: translateY(-40px);
     }
 }
+
+.shopItem button i {
+    margin-right: 8px;
+    color: #ffcc00;
+}

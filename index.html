@@ -6,14 +6,18 @@
     <title>Munchopoly</title>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-    <h2 id="scoreText">Score: 0</h2>
+    <h2 id="scoreText">Yums: 0</h2>
 
-    <p>Click the food to earn points. They will move when clicked!</p>
+    <!-- NEW -->
+    <h3 id="ypsText">YPS: 0</h3>
 
-    <!-- IMG SRC -->
+    <p>click the food to earn yums. they will move when clicked!</p>
+
+    <!-- FOOD IMG SRC -->
     <img src="resources/gfx/bread.png" id="breadImage" class="food" alt="Bread">
     <img src="resources/gfx/knife.png" id="knifeImage" class="food" alt="Knife">
     <img src="resources/gfx/chickenleg.png" id="chickenLegImage" class="food" alt="Chicken Leg">
@@ -25,10 +29,54 @@
     <!-- UI -->
     <img src="resources/gfx/shopbutton.png" id="shopButtonImage" alt="Shop Button">
 
+    <!-- SHOP -->
     <div id="shopMenu" class="hidden">
         <h3>Shop</h3>
-        <button id="upgradeClick">Upgrade Click (+1) — Cost: 20</button>
-        <p>Increase your click power!</p>
+
+        <button id="upgradeClick">
+            <i class="fa-solid fa-arrow-pointer"></i>
+            Upgrade Click (+1) — Cost: 20
+        </button>
+
+        <p>Increase your yum power!</p>
+
+        <hr>
+
+        <button id="biggerMouth">
+            <i class="fa-solid fa-arrow-pointer"></i>
+            Bigger Mouth (+5) — Cost: 50
+        </button>
+
+        <p>More Food!</p>
+
+        <hr>
+
+        <button id="yumDeluxe">
+            <i class="fa-solid fa-arrow-pointer"></i>
+            Yum Deluxe (+10) — Cost: 150
+        </button>
+
+        <p>Now THIS is deluxe!</p>
+
+        <hr>
+
+        <!-- YPS SHOP -->
+        <button id="buyChef">
+            <i class="fa-solid fa-cookie"></i>
+            Hire Chef (+1 YPS) — Cost: 50
+        </button>
+
+        <p>Automatically earns 1 Yums Per Second.</p>
+
+        <hr>
+
+        <button id="buyBakery">
+            <i class="fa-solid fa-cake-candles"></i>
+            Rent Bakery (+5 YPS) — Cost: 150
+        </button>
+
+        <p>Automatically earns 5 Yums Per Second.</p>
+
     </div>
 
     <!-- AUDIO -->
