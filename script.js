@@ -41,9 +41,15 @@ const foods = [
         element: document.getElementById("burgerImage"),
         points: 5
     },
+
     {
         element: document.getElementById("baconImage"),
         points: 3
+    },
+
+    {
+        element: document.getElementById("appleImage"),
+        points: 2
     }
 
 ];
